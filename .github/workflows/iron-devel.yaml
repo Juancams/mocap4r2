@@ -25,7 +25,7 @@ jobs:
         with:
           package-name: mocap_control mocap_control_msgs rqt_mocap_control mocap_marker_publisher mocap_marker_viz mocap_marker_viz_srvs
           target-ros2-distro: iron
-          vcs-repo-file-url: ${GITHUB_WORKSPACE}/dependency_repos.repos
+          vcs-repo-file-url: ${{GITHUB_WORKSPACE}}/dependency_repos.repos
       - name: Codecov
         uses: codecov/codecov-action@v1.1.0
         with:
