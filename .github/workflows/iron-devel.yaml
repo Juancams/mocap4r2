@@ -1,12 +1,12 @@
-name: main
+name: iron-devel
 
 on:
   pull_request:
     branches:
-      - main
+      - iron-devel
   push:
     branches:
-      - main
+      - iron-devel
       
 jobs:
   build-and-test:
@@ -17,20 +17,19 @@ jobs:
       fail-fast: false
     steps:
       - name: Setup ROS 2
-        uses: ros-tooling/setup-ros@0.3.4
+        uses: ros-tooling/setup-ros@0.7.1
         with:
-          required-ros-distributions: humble
+          required-ros-distributions: iron
       - name: build and test
-        uses: ros-tooling/action-ros-ci@0.2.6
+        uses: ros-tooling/action-ros-ci@0.3.5
         with:
           package-name: mocap_control mocap_control_msgs rqt_mocap_control mocap_marker_publisher mocap_marker_viz mocap_marker_viz_srvs
-          target-ros2-distro: humble
-          vcs-repo-file-url: https://raw.githubusercontent.com/MOCAP4ROS2-Project/mocap/main/dependency_repos.repos
+          target-ros2-distro: iron
+          vcs-repo-file-url: https://raw.githubusercontent.com/MOCAP4ROS2-Project/mocap4r2/iron-devel/dependency_repos.repos
       - name: Codecov
-        uses: codecov/codecov-action@v1.1.0
+        uses: codecov/codecov-action@v1.2.1
         with:
           file: ros_ws/lcov/total_coverage.info
           flags: unittests
           name: codecov-umbrella
-          # yml: ./codecov.yml
           fail_ci_if_error: false
