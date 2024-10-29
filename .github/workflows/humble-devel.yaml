@@ -26,6 +26,13 @@ jobs:
           package-name: mocap4r2_control mocap4r2_control_msgs rqt_mocap4r2_control mocap4r2_marker_publisher mocap4r2_marker_viz mocap4r2_marker_viz_srvs
           target-ros2-distro: humble
           vcs-repo-file-url: https://raw.githubusercontent.com/MOCAP4ROS2-Project/mocap/humble-devel/dependency_repos.repos
+          colcon-defaults: |
+            {
+              "build": {
+                "mixin": ["coverage-gcc"]
+              }
+            }
+          colcon-mixin-repository: https://raw.githubusercontent.com/colcon/colcon-mixin-repository/1ddb69bedfd1f04c2f000e95452f7c24a4d6176b/index.yaml
       - name: Upload results to Codecov
         uses: codecov/codecov-action@v4
         with:
