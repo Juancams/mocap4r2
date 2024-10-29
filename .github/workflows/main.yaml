@@ -3,29 +3,29 @@ name: main
 on:
   pull_request:
     branches:
-      - main
+      - foxy-devel
   push:
     branches:
-      - main
+      - foxy-devel
       
 jobs:
   build-and-test:
     runs-on: ${{ matrix.os }}
     strategy:
       matrix:
-        os: [ubuntu-22.04]
+        os: [ubuntu-20.04]
       fail-fast: false
     steps:
       - name: Setup ROS 2
         uses: ros-tooling/setup-ros@0.3.4
         with:
-          required-ros-distributions: humble
+          required-ros-distributions: foxy
       - name: build and test
         uses: ros-tooling/action-ros-ci@0.2.6
         with:
           package-name: mocap_control mocap_control_msgs rqt_mocap_control mocap_marker_publisher mocap_marker_viz mocap_marker_viz_srvs
-          target-ros2-distro: humble
-          vcs-repo-file-url: https://raw.githubusercontent.com/MOCAP4ROS2-Project/mocap/main/dependency_repos.repos
+          target-ros2-distro: foxy
+          vcs-repo-file-url: https://raw.githubusercontent.com/MOCAP4ROS2-Project/mocap/foxy-devel/dependency_repos.repos
       - name: Codecov
         uses: codecov/codecov-action@v1.1.0
         with:
