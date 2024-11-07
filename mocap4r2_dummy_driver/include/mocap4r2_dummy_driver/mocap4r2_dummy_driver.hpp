@@ -21,10 +21,10 @@
 #ifndef MOCAP4R2_DUMMY_DRIVER__MOCAP4R2_DUMMY_DRIVER_HPP_
 #define MOCAP4R2_DUMMY_DRIVER__MOCAP4R2_DUMMY_DRIVER_HPP_
 
-#include "mocap4r2_msgs/msg/marker.hpp"
-#include "mocap4r2_msgs/msg/markers.hpp"
-#include "mocap4r2_msgs/msg/rigid_body.hpp"
-#include "mocap4r2_msgs/msg/rigid_bodies.hpp"
+#include "mocap_interfaces/msg/marker.hpp"
+#include "mocap_interfaces/msg/marker_array.hpp"
+#include "mocap_interfaces/msg/rigid_body.hpp"
+#include "mocap_interfaces/msg/rigid_body_array.hpp"
 
 
 #include "rclcpp/rclcpp.hpp"
@@ -62,14 +62,14 @@ protected:
   void control_start(const mocap4r2_control_msgs::msg::Control::SharedPtr msg) override;
   void control_stop(const mocap4r2_control_msgs::msg::Control::SharedPtr msg) override;
 
-  rclcpp_lifecycle::LifecyclePublisher<mocap4r2_msgs::msg::Markers>::SharedPtr
+  rclcpp_lifecycle::LifecyclePublisher<mocap_interfaces::msg::MarkerArray>::SharedPtr
     mocap4r2_markers_pub_;
-  rclcpp_lifecycle::LifecyclePublisher<mocap4r2_msgs::msg::RigidBodies>::SharedPtr
+  rclcpp_lifecycle::LifecyclePublisher<mocap_interfaces::msg::RigidBodyArray>::SharedPtr
     mocap4r2_rigid_body_pub_;
 
   rclcpp::TimerBase::SharedPtr timer_;
 
-  uint32_t frame_number_{0};
+  uint32_t seq_{0};
 };
 
 }  // namespace mocap4r2_dummy_driver
