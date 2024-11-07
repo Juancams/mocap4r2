@@ -22,7 +22,7 @@
 #include <vector>
 
 #include "mocap4r2_robot_gt/gt_component.hpp"
-#include "mocap4r2_msgs/msg/rigid_body.hpp"
+#include "mocap_interfaces/msg/rigid_body.hpp"
 
 #include "rclcpp/rclcpp.hpp"
 
@@ -39,7 +39,7 @@ GTNode::GTNode(const rclcpp::NodeOptions & options)
 {
   tf_broadcaster_ = std::make_shared<tf2_ros::TransformBroadcaster>(*this);
 
-  rigid_body_sub_ = create_subscription<mocap4r2_msgs::msg::RigidBodies>(
+  rigid_body_sub_ = create_subscription<mocap_interfaces::msg::RigidBodyArray>(
     "rigid_bodies", rclcpp::SensorDataQoS(), std::bind(&GTNode::rigid_bodies_callback, this, _1));
   set_gt_origin_srv_ = create_service<mocap4r2_robot_gt_msgs::srv::SetGTOrigin>(
     "~/set_get_origin", std::bind(&GTNode::set_gt_origin_callback, this, _1, _2));
@@ -65,7 +65,7 @@ GTNode::GTNode(const rclcpp::NodeOptions & options)
 }
 
 void
-GTNode::rigid_bodies_callback(const mocap4r2_msgs::msg::RigidBodies::SharedPtr msg)
+GTNode::rigid_bodies_callback(const mocap_interfaces::msg::RigidBodyArray::SharedPtr msg)
 {
   if (!valid_gtbody2robot_) {
     try {
@@ -81,13 +81,13 @@ GTNode::rigid_bodies_callback(const mocap4r2_msgs::msg::RigidBodies::SharedPtr m
   } else {
     mocap2gtbody_.setOrigin(
       tf2::Vector3(
-        msg->rigidbodies[0].pose.position.x, msg->rigidbodies[0].pose.position.y,
-        msg->rigidbodies[0].pose.position.z));
+        msg->rigid_bodies[0].pose.position.x, msg->rigid_bodies[0].pose.position.y,
+        msg->rigid_bodies[0].pose.position.z));
     mocap2gtbody_.setRotation(
       tf2::Quaternion(
-        msg->rigidbodies[0].pose.orientation.x, msg->rigidbodies[0].pose.orientation.y,
-        msg->rigidbodies[0].pose.orientation.z,
-        msg->rigidbodies[0].pose.orientation.w));
+        msg->rigid_bodies[0].pose.orientation.x, msg->rigid_bodies[0].pose.orientation.y,
+        msg->rigid_bodies[0].pose.orientation.z,
+        msg->rigid_bodies[0].pose.orientation.w));
 
     tf2::Transform root2robotgt;
     root2robotgt = offset_ * mocap2gtbody_ * gtbody2robot_;

@@ -14,13 +14,13 @@ endif()
 find_package(ament_cmake REQUIRED)
 find_package(rclcpp REQUIRED)
 find_package(rclcpp_lifecycle REQUIRED)
-find_package(mocap4r2_msgs REQUIRED)
+find_package(mocap_interfaces REQUIRED)
 find_package(mocap4r2_control REQUIRED)
 
 set(dependencies
   rclcpp
   rclcpp_lifecycle
-  mocap4r2_msgs
+  mocap_interfaces
   mocap4r2_control
 )
 
