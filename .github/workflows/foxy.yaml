@@ -1,4 +1,4 @@
-name: rep-mocap
+name: foxy
 
 on:
   pull_request:
@@ -13,7 +13,7 @@ jobs:
     runs-on: ${{ matrix.os }}
     strategy:
       matrix:
-        os: [ubuntu-24.04]
+        os: [ubuntu-20.04]
       fail-fast: false
     steps:
       - name: Repo checkout
@@ -22,12 +22,12 @@ jobs:
       - name: Setup ROS 2
         uses: ros-tooling/setup-ros@0.7.9
         with:
-          required-ros-distributions: rolling
+          required-ros-distributions: foxy
       - name: build and test
         uses: ros-tooling/action-ros-ci@0.3.15
         with:
           package-name: mocap4r2_control mocap4r2_control_msgs rqt_mocap4r2_control mocap4r2_marker_publisher mocap4r2_marker_viz mocap4r2_marker_viz_srvs
-          target-ros2-distro: rolling
+          target-ros2-distro: foxy
           vcs-repo-file-url: ${GITHUB_WORKSPACE}/dependency_repos.repos
       - name: Codecov
         uses: codecov/codecov-action@v1.1.0
