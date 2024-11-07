@@ -1,21 +1,30 @@
 cmake_minimum_required(VERSION 3.5)
 project(mocap4r2_marker_publisher)
-set(version 2.0)
 
-set(CMAKE_CXX_STANDARD 17)
+# Default to C99
+if(NOT CMAKE_C_STANDARD)
+  set(CMAKE_C_STANDARD 99)
+endif()
+
+# Default to C++14
+if(NOT CMAKE_CXX_STANDARD)
+  set(CMAKE_CXX_STANDARD 14)
+endif()
 
 if(CMAKE_COMPILER_IS_GNUCXX OR CMAKE_CXX_COMPILER_ID MATCHES "Clang")
   add_compile_options(-Wall -Wextra -Wpedantic)
 endif()
 
-
+# find dependencies
 find_package(ament_cmake REQUIRED)
-find_package(mocap_interfaces REQUIRED)
+# uncomment the following section in order to fill in
+# further dependencies manually.
 find_package(rclcpp REQUIRED)
+find_package(mocap_interfaces REQUIRED)
 
 add_executable(mocap4r2_marker_publisher src/mocap4r2_marker_publisher.cpp)
 
-ament_target_dependencies(${PROJECT_NAME} rclcpp mocap_interfaces)
+ament_target_dependencies(mocap4r2_marker_publisher rclcpp mocap_interfaces)
 
 install(TARGETS
   mocap4r2_marker_publisher

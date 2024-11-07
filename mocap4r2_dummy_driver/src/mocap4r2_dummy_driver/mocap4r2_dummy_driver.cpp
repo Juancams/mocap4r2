@@ -56,16 +56,17 @@ DummyDriverNode::control_stop(const mocap4r2_control_msgs::msg::Control::SharedP
 void
 DummyDriverNode::publish_data()
 {
-  frame_number_++;
+  seq_++;
 
   // Markers
   if (mocap4r2_markers_pub_->get_subscription_count() > 0) {
     mocap_interfaces::msg::MarkerArray msg;
     msg.header.stamp = now();
     msg.header.frame_id = "mocap";
-    msg.seq = frame_number_;
+    msg.seq = seq_;
 
     mocap_interfaces::msg::Marker marker;
+    marker.header.stamp = this->now();
     marker.id_type = mocap_interfaces::msg::Marker::USE_INDEX;
     marker.marker_index = 0;
     marker.translation.x = 0.0;
@@ -92,9 +93,10 @@ DummyDriverNode::publish_data()
     mocap_interfaces::msg::RigidBodyArray msg_rb;
     msg_rb.header.stamp = now();
     msg_rb.header.frame_id = "mocap";
-    msg_rb.seq = frame_number_;
+    msg_rb.seq = seq_;
 
     mocap_interfaces::msg::RigidBody rb;
+    rb.header.stamp = this->now();
     rb.rigid_body_name = "rigid_body_0";
     rb.pose.position.x = 0.0;
     rb.pose.position.y = 0.0;
@@ -105,6 +107,7 @@ DummyDriverNode::publish_data()
     rb.pose.orientation.w = 1.0;
 
     mocap_interfaces::msg::Marker marker;
+    marker.header.stamp = this->now();
     marker.id_type = mocap_interfaces::msg::Marker::USE_INDEX;
     marker.marker_index = 0;
     marker.translation.x = 0.0;

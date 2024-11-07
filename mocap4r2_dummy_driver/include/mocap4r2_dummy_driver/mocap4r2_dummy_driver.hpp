@@ -69,7 +69,7 @@ protected:
 
   rclcpp::TimerBase::SharedPtr timer_;
 
-  uint32_t frame_number_{0};
+  uint32_t seq_{0};
 };
 
 }  // namespace mocap4r2_dummy_driver
