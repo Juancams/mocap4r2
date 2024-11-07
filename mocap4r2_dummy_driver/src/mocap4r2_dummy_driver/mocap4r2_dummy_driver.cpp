@@ -19,8 +19,8 @@
 // Author: Francisco Martín <fmrico@urjc.es>
 
 
-#include "mocap4r2_msgs/msg/marker.hpp"
-#include "mocap4r2_msgs/msg/markers.hpp"
+#include "mocap_interfaces/msg/marker.hpp"
+#include "mocap_interfaces/msg/marker_array.hpp"
 
 #include "mocap4r2_dummy_driver/mocap4r2_dummy_driver.hpp"
 #include "lifecycle_msgs/msg/state.hpp"
@@ -60,13 +60,13 @@ DummyDriverNode::publish_data()
 
   // Markers
   if (mocap4r2_markers_pub_->get_subscription_count() > 0) {
-    mocap4r2_msgs::msg::Markers msg;
+    mocap_interfaces::msg::MarkerArray msg;
     msg.header.stamp = now();
     msg.header.frame_id = "mocap";
-    msg.frame_number = frame_number_;
+    msg.seq = frame_number_;
 
-    mocap4r2_msgs::msg::Marker marker;
-    marker.id_type = mocap4r2_msgs::msg::Marker::USE_INDEX;
+    mocap_interfaces::msg::Marker marker;
+    marker.id_type = mocap_interfaces::msg::Marker::USE_INDEX;
     marker.marker_index = 0;
     marker.translation.x = 0.0;
     marker.translation.y = 0.0;
@@ -89,12 +89,12 @@ DummyDriverNode::publish_data()
   }
 
   if (mocap4r2_rigid_body_pub_->get_subscription_count() > 0) {
-    mocap4r2_msgs::msg::RigidBodies msg_rb;
+    mocap_interfaces::msg::RigidBodyArray msg_rb;
     msg_rb.header.stamp = now();
     msg_rb.header.frame_id = "mocap";
-    msg_rb.frame_number = frame_number_;
+    msg_rb.seq = frame_number_;
 
-    mocap4r2_msgs::msg::RigidBody rb;
+    mocap_interfaces::msg::RigidBody rb;
     rb.rigid_body_name = "rigid_body_0";
     rb.pose.position.x = 0.0;
     rb.pose.position.y = 0.0;
@@ -104,8 +104,8 @@ DummyDriverNode::publish_data()
     rb.pose.orientation.z = 0.0;
     rb.pose.orientation.w = 1.0;
 
-    mocap4r2_msgs::msg::Marker marker;
-    marker.id_type = mocap4r2_msgs::msg::Marker::USE_INDEX;
+    mocap_interfaces::msg::Marker marker;
+    marker.id_type = mocap_interfaces::msg::Marker::USE_INDEX;
     marker.marker_index = 0;
     marker.translation.x = 0.0;
     marker.translation.y = 0.0;
@@ -124,7 +124,7 @@ DummyDriverNode::publish_data()
     marker.translation.z = 0.0;
     rb.markers.push_back(marker);
 
-    msg_rb.rigidbodies.push_back(rb);
+    msg_rb.rigid_bodies.push_back(rb);
 
     mocap4r2_rigid_body_pub_->publish(msg_rb);
   }
@@ -138,9 +138,9 @@ using CallbackReturnT =
 CallbackReturnT
 DummyDriverNode::on_configure(const rclcpp_lifecycle::State & state)
 {
-  mocap4r2_markers_pub_ = create_publisher<mocap4r2_msgs::msg::Markers>(
+  mocap4r2_markers_pub_ = create_publisher<mocap_interfaces::msg::MarkerArray>(
     "markers", rclcpp::QoS(1000));
-  mocap4r2_rigid_body_pub_ = create_publisher<mocap4r2_msgs::msg::RigidBodies>(
+  mocap4r2_rigid_body_pub_ = create_publisher<mocap_interfaces::msg::RigidBodyArray>(
     "rigid_bodies", rclcpp::QoS(1000));
 
   // Connect with the mocap system

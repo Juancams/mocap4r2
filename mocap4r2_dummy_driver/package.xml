@@ -14,7 +14,7 @@
 
   <depend>rclcpp</depend>
   <depend>rclcpp_lifecycle</depend>
-  <depend>mocap4r2_msgs</depend>
+  <depend>mocap_interfaces</depend>
   <depend>mocap4r2_control</depend>
 
   <test_depend>ament_lint_common</test_depend>
