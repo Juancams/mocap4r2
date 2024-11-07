@@ -2,10 +2,10 @@ name: jazzy-devel
 on:
   pull_request:
     branches:
-      - rep-mocap
+      - jazzy-devel
   push:
     branches:
-      - rep-mocap
+      - jazzy-devel
       
 jobs:
   build-and-test:

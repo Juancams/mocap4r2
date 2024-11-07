@@ -2,10 +2,10 @@ name: rolling
 on:
   pull_request:
     branches:
-      - rep-mocap
+      - rolling
   push:
     branches:
-      - rep-mocap
+      - rolling
       
 jobs:
   build-and-test:

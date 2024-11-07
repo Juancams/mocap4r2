@@ -3,10 +3,10 @@ name: foxy-devel
 on:
   pull_request:
     branches:
-      - rep-mocap
+      - foxy-devel
   push:
     branches:
-      - rep-mocap
+      - foxy-devel
       
 jobs:
   build-and-test:

@@ -3,10 +3,10 @@ name: humble-devel
 on:
   pull_request:
     branches:
-      - rep-mocap
+      - humble-devel
   push:
     branches:
-      - rep-mocap
+      - humble-devel
       
 jobs:
   build-and-test:
