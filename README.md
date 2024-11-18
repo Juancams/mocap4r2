@@ -1,9 +1,9 @@
 # MOCAP4ROS2 
 
 [![GitHub Action
-Status](https://github.com/MOCAP4ROS2-Project/mocap4r2/workflows/rolling/badge.svg)](https://github.com/aaggj/mocap4r2)
+Status](https://github.com/MOCAP4ROS2-Project/mocap4r2/workflows/rolling/badge.svg)](https://github.com/MOCAP4ROS2-Project/mocap4r2)
 [![GitHub Action
-Status](https://github.com/MOCAP4ROS2-Project/mocap4r2/workflows/rep-mocap/badge.svg)](https://github.com/aaggj/mocap4r2)
+Status](https://github.com/MOCAP4ROS2-Project/mocap4r2/workflows/rep-mocap/badge.svg)](https://github.com/MOCAP4ROS2-Project/mocap4r2)
 [![GitHub Action
 Status](https://github.com/MOCAP4ROS2-Project/mocap4r2/workflows/humble-devel/badge.svg)](https://github.com/MOCAP4ROS2-Project/mocap4r2)
 [![GitHub Action
