@@ -1,18 +1,19 @@
-name: rolling
+name: humble-devel
+
 on:
   pull_request:
     branches:
-      - rolling
+      - humble-devel
   push:
     branches:
-      - rolling
+      - humble-devel
       
 jobs:
   build-and-test:
     runs-on: ${{ matrix.os }}
     strategy:
       matrix:
-        os: [ubuntu-24.04]
+        os: [ubuntu-22.04]
       fail-fast: false
     steps:
       - name: Repo checkout
@@ -21,7 +22,7 @@ jobs:
       - name: Setup ROS 2
         uses: ros-tooling/setup-ros@0.7.9
         with:
-          required-ros-distributions: rolling
+          required-ros-distributions: humble
       - name: build and test
         uses: ros-tooling/action-ros-ci@0.3.15
         with:
